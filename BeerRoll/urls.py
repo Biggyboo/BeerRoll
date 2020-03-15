@@ -13,9 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
+import django.contrib.admin as admin
+import django.urls
+import django.conf.urls
+
+import BeerRollAPI.views
+
+import rest_framework.permissions as permissions
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    django.urls.path('admin/', admin.site.urls),
+    django.urls.path("beer/", BeerRollAPI.views.BeerView.as_view()),
+    django.urls.path("beer/<str:pk>", BeerRollAPI.views.BeerOnStock.as_view())
+
 ]
